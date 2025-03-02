@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:44:06 by amalangu          #+#    #+#             */
-/*   Updated: 2025/02/27 18:09:05 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/03/02 19:11:11 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,16 @@ typedef struct s_stack
 }					t_stack;
 
 void				free_stack(t_stack *stack);
-t_stack				*set_stack(void);
+t_stack				*set_stack(char *arg);
 void				print_stack(t_stack *stack);
 void				print_stacks(t_stack *a, t_stack *b);
 
-void	push_a(t_stack **a, t_stack **b);
-void	push_b(t_stack **a, t_stack **b);
+void				push_a(t_stack **a, t_stack **b);
+void				push_b(t_stack **a, t_stack **b);
+void				push_a_new(t_stack **a, t_stack **b);
+void				push_b_new(t_stack **a, t_stack **b);
 
-void	swap(t_stack *stack, char a_or_b);
-void	ss(t_stack *a, t_stack *b);
+void				swap(t_stack *stack, char a_or_b);
+void				ss(t_stack *a, t_stack *b);
 
 #endif

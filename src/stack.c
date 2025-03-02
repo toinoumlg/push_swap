@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:30:04 by amalangu          #+#    #+#             */
-/*   Updated: 2025/02/27 18:01:43 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/03/02 19:44:48 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,43 @@ void	free_stack(t_stack *stack)
 	}
 }
 
-t_stack	*set_stack(void)
+int	check_arg(char *arg)
+{
+	int	i;
+	int	arg_size;
+
+	arg_size = 1;
+	i = 0;
+	if (!arg)
+		return (-1);
+	while (arg[i])
+	{
+		if (arg[i] >= 48 && arg[i] <= 57)
+			i++;
+		else if ((arg[i - 1] >= 48 && arg[i - 1] <= 57) && arg[i] == 32)
+		{
+			arg_size++;
+			i++;
+		}
+		else
+			return (-1);
+	}
+	return (arg_size);
+}
+
+t_stack	*set_stack(char *arg)
 {
 	t_stack	*new;
 	t_stack	*head;
 	t_stack	*tmp;
 	int		i;
+	int		arg_size;
 
 	i = 0;
+	arg_size = check_arg(arg);
+	ft_printf("%d\n", arg_size);
+	if (arg_size < 0)
+		return (NULL);
 	head = ft_calloc(sizeof(t_stack), 1);
 	if (!head)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 18:07:46 by amalangu          #+#    #+#             */
-/*   Updated: 2025/02/27 18:07:56 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/03/02 19:08:03 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,29 @@ void	push_a(t_stack **a, t_stack **b)
 		*a = swap;
 	}
 	ft_printf("pa\n");
+}
+
+void	push_a_new(t_stack **a, t_stack **b)
+{
+	t_stack	*swap;
+
+	swap = *b;
+	if (!swap)
+		return ;
+	*b = swap->next;
+	swap->next = *a;
+	*a = swap;
+	ft_printf("pa\n");
+}
+
+void	push_b_new(t_stack **a, t_stack **b)
+{
+	t_stack *swap;
+	swap = *a;
+	if (!swap)
+		return ;
+	*a = swap->next;
+	swap->next = *b;
+	*b = swap;
+	ft_printf("pb\n");
 }
