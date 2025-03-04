@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 18:08:30 by amalangu          #+#    #+#             */
-/*   Updated: 2025/02/27 18:08:42 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/03/04 19:03:37 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,13 @@ void	swap(t_stack *stack, char a_or_b)
 	tmp = stack->i;
 	stack->i = stack->next->i;
 	stack->next->i = tmp;
-	if (a_or_b == 'a')
-		ft_printf("sa\n");
-	else if (a_or_b == 'b')
-		ft_printf("sb\n");
+	if (a_or_b)
+		ft_printf("s%c\n", a_or_b);
 }
 
 void	ss(t_stack *a, t_stack *b)
 {
-	int	tmp;
-
-	if (a && a->next)
-	{
-		tmp = a->i;
-		a->i = a->next->i;
-		a->next->i = tmp;
-	}
-	if (b && b->next)
-	{
-		tmp = b->i;
-		b->i = b->next->i;
-		b->next->i = tmp;
-	}
+	swap(a, 0);
+	swap(b, 0);
 	ft_printf("ss\n");
 }

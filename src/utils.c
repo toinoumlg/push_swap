@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/27 16:43:42 by amalangu          #+#    #+#             */
-/*   Updated: 2025/03/04 19:33:58 by amalangu         ###   ########.fr       */
+/*   Created: 2025/03/04 16:28:21 by amalangu          #+#    #+#             */
+/*   Updated: 2025/03/04 16:28:45 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-int	main(int ac, char **av)
+void	print_stacks(t_stack *a, t_stack *b)
 {
-	t_stack	*a;
-	t_stack	*b;
+	t_stack	*tmp_a;
+	t_stack	*tmp_b;
 
-	if (ac < 2)
-		return (ft_printf("Error\nDoesnt have args"), -1);
-	a = set_stack(av, ac);
-	b = NULL;
-	if (!a)
-		return (-1);
-	print_stacks(a, b);
-	free_stack(a);
-	free_stack(b);
+	tmp_a = a;
+	tmp_b = b;
+	ft_printf("stacks\na ---- b\n");
+	while (tmp_a || tmp_b)
+	{
+		if (tmp_a && tmp_b)
+			ft_printf("[%d] - [%d]\n", tmp_a->i, tmp_b->i);
+		else if (tmp_a)
+			ft_printf("[%d] - []\n", tmp_a->i);
+		else
+			ft_printf("[] - [%d]\n", tmp_b->i);
+		if (tmp_a)
+			tmp_a = tmp_a->next;
+		if (tmp_b)
+			tmp_b = tmp_b->next;
+	}
 }
