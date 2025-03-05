@@ -59,6 +59,7 @@
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "files.associations": {
     "*.gql": "graphql",
-    "push_swap.h": "c"
+    "push_swap.h": "c",
+    "random": "c"
   }
 }
