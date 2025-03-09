@@ -60,6 +60,12 @@
   "files.associations": {
     "*.gql": "graphql",
     "push_swap.h": "c",
-    "random": "c"
-  }
+    "random": "c",
+    "array": "c",
+    "string_view": "c",
+    "initializer_list": "c",
+    "bitset": "c",
+    "regex": "c"
+  },
+  "C_Cpp.errorSquiggles": "disabled"
 }

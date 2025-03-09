@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:44:06 by amalangu          #+#    #+#             */
-/*   Updated: 2025/03/04 19:26:56 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/03/09 17:15:47 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct s_stack
 	struct s_stack	*next;
 }					t_stack;
 
+int					check_arg(char **av, int ac);
 int					*set_up_args(char **av, int ac);
 
 t_stack				*set_stack(char **av, int ac);

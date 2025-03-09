@@ -1,6 +1,6 @@
 NAME= push_swap
 C_FLAGS= -Werror -Wall -Wextra
-SRCS= main.c stack.c swap.c push.c rotate.c check.c utils.c
+SRCS= main.c stack.c swap.c push.c rotate.c check.c check_utils.c utils.c
 OBJS= $(SRCS:%.c=$(OBJ_DIR)/%.o)
 SRC_DIR= src/
 OBJ_DIR= $(SRC_DIR)obj
@@ -16,6 +16,10 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)%.c $(HEADER)
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
+
+visualizer: all
+	@./push_swap_visualizer/build/bin/visualizer
+
 
 norminette:
 	clear
@@ -34,4 +38,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all libftprintf norminette
+.PHONY: all libftprintf norminette visualizer
