@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:43:42 by amalangu          #+#    #+#             */
-/*   Updated: 2025/03/10 20:26:50 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/03/10 20:58:13 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	push_b_odd(t_stack **a, t_stack **b)
 		return (push_b(a, b), rotate(b, 'b'));
 	if (head_index(*a) > tail_index(*b))
 		return (push_b(a, b), rotate(b, 'b'));
-	while (head_index(*a) < tail_index(*b) && tail_previous_index(*b) % 2 != 0)
+	while (head_index(*a) < tail_index(*b))
 	{
 		reverse_rotate(b, 'b');
 		i++;
@@ -136,7 +136,7 @@ void	push_b_even(t_stack **a, t_stack **b)
 		return (push_b(a, b));
 	if (head_index(*a) > head_index(*b))
 		return (push_b(a, b));
-	while (head_index(*a) < head_index(*b) && head_next_index(*b) % 2 != 1)
+	while (head_index(*a) < head_index(*b))
 	{
 		rotate(b, 'b');
 		if (head_index(*b) % 2 == 1)
@@ -172,56 +172,24 @@ void	revert_a(t_stack **a, t_stack **b, int i)
 	}
 }
 
-void	push_b_split(t_stack **a, t_stack **b, int size, int i)
+void	push_b_split(t_stack **a, t_stack **b, int size)
 {
-	print_stacks(*a, *b);
-	while (stack_size(*a) != i)
-	{
-		
-		if (head_index(*a) == size - i)
-			return (revert_a(a, b, i), push_b_split(a, b, size, ++i));
-		if (head_index(*a) % 2 == 0)
-			return (push_b_even(a, b), push_b_split(a, b, size, i));
-		if (head_index(*a) % 2 == 1)
-			return (push_b_odd(a, b), push_b_split(a, b, size, i));
-	}
-	print_stacks(*a, *b);
+	push_b(a, b);
+	ft_printf("%d\n", size);
+	if (stack_size(*a) == 1)
+		return print_stacks(*a, *b);
+	if (head_index(*a) == size)
+		return (rotate(a, 'a'), push_b_split(a, b, size));
+	if (head_index(*a) % 2 == 0)
+		return (push_b_even(a, b), push_b_split(a, b, size));
+	if (head_index(*a) % 2 == 1)
+		return (push_b_odd(a, b), push_b_split(a, b, size));
+	
 }
-
-void	insert_b_reversed(t_stack **a, t_stack **b)
-{
-	int	i;
-
-	i = 0;
-	if (head_value(*b) < head_value(*a))
-		return (push_a(a, b));
-	if (head_value(*b) > tail_value(*a))
-		return (push_a(a, b), rotate(a, 'a'));
-	while ((head_value(*b) > head_value(*a)))
-	{
-		rotate(a, 'a');
-		i++;
-	}
-	// ft_printf("%d\n", i);
-	push_a(a, b);
-	while (i > 0)
-	{
-		reverse_rotate(a, 'a');
-		i--;
-	}
-}
-
-// void	push_back_to_a(t_stack **a, t_stack **b)
-// {
-// 	while (stack_size(*b) !=)
-// }
 
 void	algo_big(t_stack **a, t_stack **b)
 {
-	push_b(a, b);
-	push_b_split(a, b, stack_size(*a) + 1, 0);
-	// print_stacks(*a, *b);
-	// push_back_to_a(a, b);
+	push_b_split(a, b, stack_size(*a));
 }
 
 int	main(int ac, char **av)
@@ -241,7 +209,6 @@ int	main(int ac, char **av)
 		algo_small(&a, &b, stack_size(a));
 	else
 		algo_big(&a, &b);
-	// print_stacks(a, b);
 	free_stack(a);
 	free_stack(b);
 }
