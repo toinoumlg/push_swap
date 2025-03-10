@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:43:42 by amalangu          #+#    #+#             */
-/*   Updated: 2025/03/09 20:07:11 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/03/10 20:26:50 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,37 @@ int	tail_value(t_stack *stack)
 	return (stack->i);
 }
 
+int	head_index(t_stack *stack)
+{
+	return (stack->index);
+}
+
+int	next_index(t_stack *stack)
+{
+	if (stack->next)
+		return (stack->next->index);
+	return (-1);
+}
+
+int	tail_index(t_stack *stack)
+{
+	while (stack->next)
+		stack = stack->next;
+	return (stack->index);
+}
+
+int	tail_previous_index(t_stack *stack)
+{
+	while (stack->next->next)
+		stack = stack->next;
+	return (stack->index);
+}
+
+int	head_next_index(t_stack *stack)
+{
+	return (stack->index);
+}
+
 int	is_list_sorted(t_stack *stack)
 {
 	while (stack->next && head_value(stack) < next_value(stack))
@@ -41,7 +72,7 @@ int	is_list_sorted(t_stack *stack)
 		return (1);
 }
 
-int	list_size(t_stack *stack)
+int	stack_size(t_stack *stack)
 {
 	int	i;
 
@@ -74,37 +105,87 @@ void	algo_small(t_stack **a, t_stack **b, int size)
 		return (three(a, b));
 }
 
-void	push_b_reversed_order(t_stack **a, t_stack **b)
+void	push_b_odd(t_stack **a, t_stack **b)
 {
 	int	i;
 
 	i = 0;
-	if (!*b)
-		return (push_b(a, b));
-	// print_stacks(*a, *b);
-	if (list_size(*b) < 2)
-	{
-		push_b(a, b);
-		if (head_value(*b) < tail_value(*b))
-			rotate(b, 'b');
-		return ;
-	}
-	if (head_value(*b) < head_value(*a))
-		return (push_b(a, b));
-	if (tail_value(*b) > head_value(*a))
+	if (tail_index(*b) % 2 == 0)
 		return (push_b(a, b), rotate(b, 'b'));
-	while (!(head_value(*b) < head_value(*a)))
+	if (head_index(*a) > tail_index(*b))
+		return (push_b(a, b), rotate(b, 'b'));
+	while (head_index(*a) < tail_index(*b) && tail_previous_index(*b) % 2 != 0)
 	{
-		rotate(b, 'b');
+		reverse_rotate(b, 'b');
 		i++;
 	}
-	// ft_printf("%d\n", i);
 	push_b(a, b);
-	while (i > 0)
+	while (i > 0 && head_index(*b) % 2 != 1)
+	{
+		rotate(b, 'b');
+		i--;
+	}
+}
+
+void	push_b_even(t_stack **a, t_stack **b)
+{
+	int	i;
+
+	i = 0;
+	if (head_index(*b) % 2 == 1)
+		return (push_b(a, b));
+	if (head_index(*a) > head_index(*b))
+		return (push_b(a, b));
+	while (head_index(*a) < head_index(*b) && head_next_index(*b) % 2 != 1)
+	{
+		rotate(b, 'b');
+		if (head_index(*b) % 2 == 1)
+			break ;
+		i++;
+	}
+	push_b(a, b);
+	while (i > 0 && head_index(*b) % 2 != 0)
 	{
 		reverse_rotate(b, 'b');
 		i--;
 	}
+}
+
+void	revert_a(t_stack **a, t_stack **b, int i)
+{
+	int	j;
+
+	if (stack_size(*a) == 2)
+		return ;
+	push_b(a, b);
+	j = i;
+	while (i > 0)
+	{
+		reverse_rotate(a, 'a');
+		i--;
+	}
+	push_a(a, b);
+	while (j > 0)
+	{
+		rotate(a, 'a');
+		j--;
+	}
+}
+
+void	push_b_split(t_stack **a, t_stack **b, int size, int i)
+{
+	print_stacks(*a, *b);
+	while (stack_size(*a) != i)
+	{
+		
+		if (head_index(*a) == size - i)
+			return (revert_a(a, b, i), push_b_split(a, b, size, ++i));
+		if (head_index(*a) % 2 == 0)
+			return (push_b_even(a, b), push_b_split(a, b, size, i));
+		if (head_index(*a) % 2 == 1)
+			return (push_b_odd(a, b), push_b_split(a, b, size, i));
+	}
+	print_stacks(*a, *b);
 }
 
 void	insert_b_reversed(t_stack **a, t_stack **b)
@@ -112,7 +193,6 @@ void	insert_b_reversed(t_stack **a, t_stack **b)
 	int	i;
 
 	i = 0;
-	// print_stacks(*a, *b);
 	if (head_value(*b) < head_value(*a))
 		return (push_a(a, b));
 	if (head_value(*b) > tail_value(*a))
@@ -131,14 +211,17 @@ void	insert_b_reversed(t_stack **a, t_stack **b)
 	}
 }
 
+// void	push_back_to_a(t_stack **a, t_stack **b)
+// {
+// 	while (stack_size(*b) !=)
+// }
+
 void	algo_big(t_stack **a, t_stack **b)
 {
-	while (list_size(*a) != 3)
-		push_b_reversed_order(a, b);
-	three(a, b);
+	push_b(a, b);
+	push_b_split(a, b, stack_size(*a) + 1, 0);
 	// print_stacks(*a, *b);
-	while (list_size(*b) != 0)
-		insert_b_reversed(a, b);
+	// push_back_to_a(a, b);
 }
 
 int	main(int ac, char **av)
@@ -152,11 +235,10 @@ int	main(int ac, char **av)
 	b = NULL;
 	if (!a)
 		return (-1);
-	// print_stacks(a, b);
 	if (is_list_sorted(a))
 		return (free_stack(a), ft_printf("list is already sorted\n"), 0);
-	if (list_size(a) <= 3)
-		algo_small(&a, &b, list_size(a));
+	if (stack_size(a) <= 3)
+		algo_small(&a, &b, stack_size(a));
 	else
 		algo_big(&a, &b);
 	// print_stacks(a, b);

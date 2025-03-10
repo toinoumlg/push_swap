@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:44:06 by amalangu          #+#    #+#             */
-/*   Updated: 2025/03/09 17:15:47 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/03/10 18:23:07 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,21 @@
 
 # include "../libftprintf/include/ft_printf.h"
 
+# ifndef FT_PRINTF_COLORS
+#  define RESET "\x1B[0m"
+#  define RED "\x1B[31m"
+#  define GREEN "\x1B[32m"
+#  define YELLOW "\x1B[33m"
+#  define BLUE "\x1B[34m"
+#  define MAGENTA "\x1B[35m"
+#  define CYAN "\x1B[36m"
+#  define WHITE "\x1B[37m"
+# endif
+
 typedef struct s_stack
 {
 	int				i;
+	int				index;
 	struct s_stack	*next;
 }					t_stack;
 
