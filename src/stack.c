@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:30:04 by amalangu          #+#    #+#             */
-/*   Updated: 2025/03/10 17:03:29 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/03/18 14:02:49 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	get_index(int *args, int i)
 	int	j;
 
 	j = -1;
-	index = 1;
+	index = 0;
 	while (args[++j])
 	{
 		if (args[j] < i)

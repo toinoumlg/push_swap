@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:44:06 by amalangu          #+#    #+#             */
-/*   Updated: 2025/03/10 18:23:07 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/03/18 14:53:49 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void				free_stack(t_stack *stack);
 void				push_a(t_stack **a, t_stack **b);
 void				push_b(t_stack **a, t_stack **b);
 
-void				swap(t_stack *stack, char a_or_b);
-void				ss(t_stack *a, t_stack *b);
+void				swap(t_stack **stack, char a_or_b);
+void				ss(t_stack **a, t_stack **b);
 
 void				rotate(t_stack **stack, char a_or_b);
 void				rr(t_stack **a, t_stack **b);

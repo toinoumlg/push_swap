@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:43:42 by amalangu          #+#    #+#             */
-/*   Updated: 2025/03/10 20:58:13 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:07:30 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,99 +97,61 @@ void	three(t_stack **a, t_stack **b)
 		return (rotate(a, 'a'), push_a(a, b), reverse_rotate(a, 'a'));
 }
 
+void	insert_back_b(t_stack **a, t_stack **b, int head)
+{
+	while (head_index(*b) < head_index(*a) && head_index(*b)> next_index())
+		rotate(a, 'a');
+	push_a(a, b);
+	while (head_index(*a) != head)
+		reverse_rotate(a, 'a');
+}
+
+void	less_than_five(t_stack **a, t_stack **b)
+{
+	while (stack_size(*a) != 3)
+		push_b(a, b);
+	three(a, b);
+	while (stack_size(*b) != 0)
+		insert_back_b(a, b, head_index(*a));
+}
+
 void	algo_small(t_stack **a, t_stack **b, int size)
 {
 	if (size == 2)
 		return (rotate(a, 'a'));
 	if (size == 3)
 		return (three(a, b));
+	else
+		return (less_than_five(a, b));
 }
 
-void	push_b_odd(t_stack **a, t_stack **b)
+void	algo_big(t_stack **a, t_stack **b, int size)
 {
+	int	max_num;
+	int	max_bits;
 	int	i;
-
-	i = 0;
-	if (tail_index(*b) % 2 == 0)
-		return (push_b(a, b), rotate(b, 'b'));
-	if (head_index(*a) > tail_index(*b))
-		return (push_b(a, b), rotate(b, 'b'));
-	while (head_index(*a) < tail_index(*b))
-	{
-		reverse_rotate(b, 'b');
-		i++;
-	}
-	push_b(a, b);
-	while (i > 0 && head_index(*b) % 2 != 1)
-	{
-		rotate(b, 'b');
-		i--;
-	}
-}
-
-void	push_b_even(t_stack **a, t_stack **b)
-{
-	int	i;
-
-	i = 0;
-	if (head_index(*b) % 2 == 1)
-		return (push_b(a, b));
-	if (head_index(*a) > head_index(*b))
-		return (push_b(a, b));
-	while (head_index(*a) < head_index(*b))
-	{
-		rotate(b, 'b');
-		if (head_index(*b) % 2 == 1)
-			break ;
-		i++;
-	}
-	push_b(a, b);
-	while (i > 0 && head_index(*b) % 2 != 0)
-	{
-		reverse_rotate(b, 'b');
-		i--;
-	}
-}
-
-void	revert_a(t_stack **a, t_stack **b, int i)
-{
 	int	j;
 
-	if (stack_size(*a) == 2)
-		return ;
-	push_b(a, b);
-	j = i;
-	while (i > 0)
+	max_num = size - 1;
+	max_bits = 0;
+	i = 0;
+	while ((max_num >> max_bits) != 0)
+		++max_bits;
+	while (i < max_bits)
 	{
-		reverse_rotate(a, 'a');
-		i--;
+		j = 0;
+		while (j < size)
+		{
+			if (((head_index(*a) >> i) & 1) == 1)
+				rotate(a, 'a');
+			else
+				push_b(a, b);
+			++j;
+		}
+		while (stack_size(*b) != 0)
+			push_a(a, b);
+		++i;
 	}
-	push_a(a, b);
-	while (j > 0)
-	{
-		rotate(a, 'a');
-		j--;
-	}
-}
-
-void	push_b_split(t_stack **a, t_stack **b, int size)
-{
-	push_b(a, b);
-	ft_printf("%d\n", size);
-	if (stack_size(*a) == 1)
-		return print_stacks(*a, *b);
-	if (head_index(*a) == size)
-		return (rotate(a, 'a'), push_b_split(a, b, size));
-	if (head_index(*a) % 2 == 0)
-		return (push_b_even(a, b), push_b_split(a, b, size));
-	if (head_index(*a) % 2 == 1)
-		return (push_b_odd(a, b), push_b_split(a, b, size));
-	
-}
-
-void	algo_big(t_stack **a, t_stack **b)
-{
-	push_b_split(a, b, stack_size(*a));
 }
 
 int	main(int ac, char **av)
@@ -205,10 +167,10 @@ int	main(int ac, char **av)
 		return (-1);
 	if (is_list_sorted(a))
 		return (free_stack(a), ft_printf("list is already sorted\n"), 0);
-	if (stack_size(a) <= 3)
+	if (stack_size(a) <= 5)
 		algo_small(&a, &b, stack_size(a));
 	else
-		algo_big(&a, &b);
+		algo_big(&a, &b, stack_size(a));
 	free_stack(a);
 	free_stack(b);
 }
