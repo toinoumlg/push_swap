@@ -1,6 +1,6 @@
 NAME= push_swap
 C_FLAGS= -Werror -Wall -Wextra
-SRCS= main.c stack.c swap.c push.c rotate.c check.c check_utils.c utils.c
+SRCS= main.c stack.c swap.c push.c rotate.c check.c check_utils.c utils.c index.c index_utils.c radx.c sort_small.c
 OBJS= $(SRCS:%.c=$(OBJ_DIR)/%.o)
 SRC_DIR= src/
 OBJ_DIR= $(SRC_DIR)obj

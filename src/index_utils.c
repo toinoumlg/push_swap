@@ -1,36 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   index_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/27 18:08:30 by amalangu          #+#    #+#             */
-/*   Updated: 2025/03/20 19:08:18 by amalangu         ###   ########.fr       */
+/*   Created: 2025/03/20 17:23:48 by amalangu          #+#    #+#             */
+/*   Updated: 2025/03/20 19:08:33 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	swap(t_stack **stack, char a_or_b)
+int	head_index(t_stack *stack)
 {
-	t_stack	*head;
-	t_stack	*next;
-
-	head = *stack;
-	if (!head || !head->next)
-		return ;
-	next = head->next;
-	head->next = next->next;
-	next->next = head;
-	*stack = next;
-	if (a_or_b)
-		ft_printf("s%c\n", a_or_b);
+	return (stack->index);
 }
 
-void	ss(t_stack **a, t_stack **b)
+int	next_index(t_stack *stack)
 {
-	swap(a, 0);
-	swap(b, 0);
-	ft_printf("ss\n");
+	if (stack->next)
+		return (stack->next->index);
+	return (-1);
+}
+
+int	tail_index(t_stack *stack)
+{
+	while (stack->next)
+		stack = stack->next;
+	return (stack->index);
+}
+
+int	tail_previous_index(t_stack *stack)
+{
+	while (stack->next->next)
+		stack = stack->next;
+	return (stack->index);
+}
+
+int	head_next_index(t_stack *stack)
+{
+	return (stack->index);
 }

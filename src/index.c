@@ -1,36 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   index.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/27 18:08:30 by amalangu          #+#    #+#             */
-/*   Updated: 2025/03/20 19:08:18 by amalangu         ###   ########.fr       */
+/*   Created: 2025/03/20 19:01:47 by amalangu          #+#    #+#             */
+/*   Updated: 2025/03/20 19:08:01 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	swap(t_stack **stack, char a_or_b)
+int	get_index(long *args, int i, int size)
 {
-	t_stack	*head;
-	t_stack	*next;
+	int	index;
+	int	j;
 
-	head = *stack;
-	if (!head || !head->next)
-		return ;
-	next = head->next;
-	head->next = next->next;
-	next->next = head;
-	*stack = next;
-	if (a_or_b)
-		ft_printf("s%c\n", a_or_b);
+	j = -1;
+	index = 0;
+	while (++j < size)
+	{
+		if (args[j] < i)
+			index++;
+	}
+	return (index);
 }
 
-void	ss(t_stack **a, t_stack **b)
+void	set_index(t_stack **head, long *args, int size)
 {
-	swap(a, 0);
-	swap(b, 0);
-	ft_printf("ss\n");
+	t_stack	*tmp;
+	int		i;
+
+	tmp = *head;
+	i = 0;
+	while (tmp)
+	{
+		tmp->index = get_index(args, args[i++], size);
+		tmp = tmp->next;
+	}
 }

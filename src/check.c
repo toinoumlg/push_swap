@@ -6,65 +6,101 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:55:38 by amalangu          #+#    #+#             */
-/*   Updated: 2025/03/09 18:29:36 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/03/23 11:55:26 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	fill_args_string(char *av, int *args)
+int	check_and_reset_tmp(long *nb, char *tmp, long **args, int *x)
 {
-	char	*tmp;
-	int		i;
-	int		j;
-	int		x;
-
-	i = 0;
-	x = -1;
-	tmp = ft_calloc(sizeof(char), 16);
-	while (av[i])
-	{
-		j = -1;
-		while (av[i] >= 48 && av[i] <= 57)
-		{
-			tmp[++j] = av[i];
-			i++;
-		}
-		if ((av[i - 1] >= 48 && av[i - 1] <= 57) && av[i] == 32)
-		{
-			i++;
-			args[++x] = ft_atoi(tmp);
-			ft_bzero(tmp, 16);
-		}
-		if (av[i] == 0 && (av[i - 1] >= 48 && av[i - 1] <= 57))
-			return (args[++x] = ft_atoi(tmp), free(tmp));
-	}
+	*nb = ft_atol(tmp);
+	if (*nb <= INT_MAX && *nb >= INT_MIN)
+		args[++*x] = nb;
+	else
+		return (-1);
+	ft_bzero(tmp, 16);
+	return (0);
 }
 
-void	fill_args(char **av, int *args, int ac)
+int	fill_args_string(char *av, long *args, int i, int j)
 {
-	int	i;
+	char	tmp[16];
+	long	nb;
+	int		x;
+
+	x = -1;
+	ft_bzero(tmp, 16);
+	while (av[i])
+	{
+		j = 0;
+		if (av[i] == '-' || av[i] == '+')
+			tmp[j++] = av[i++];
+		while (av[i] >= 48 && av[i] <= 57)
+			tmp[j++] = av[i++];
+		if (j > 0 && (av[i] == ' ' || av[i] == '\0'))
+			if (check_and_reset_tmp(&nb, tmp, &args, &x))
+				return (-1);
+		if (av[i] == ' ')
+			i++;
+	}
+	return (0);
+}
+
+int	fill_args(char **av, long *args, int ac)
+{
+	int		i;
+	long	tmp;
 
 	i = 0;
 	if (ac > 2)
+	{
 		while (av[++i])
-			args[i - 1] = ft_atoi(av[i]);
+		{
+			tmp = atol(av[i]);
+			if (tmp <= INT_MAX && tmp >= INT_MIN)
+				args[i - 1] = ft_atoi(av[i]);
+			else
+				return (-1);
+		}
+	}
 	if (ac == 2)
-		fill_args_string(av[1], args);
+		if (fill_args_string(av[1], args, 0, 0))
+			return (-1);
+	return (0);
 }
 
-int	*set_up_args(char **av, int ac)
+int	duplicate(long *args)
 {
-	int	*args;
+	int	i;
+	int	x;
+
+	i = -1;
+	while (args[++i])
+	{
+		x = i;
+		while (args[++x])
+			if (args[i] == args[x])
+				return (-1);
+	}
+	return (0);
+}
+
+int	set_up_args(char **av, int ac, long **args)
+{
 	int	size;
 
 	size = check_arg(av, ac);
 	if (size < 1)
-		return (ft_printf("Error\nArguments arent correct"), NULL);
+		return (ft_printf("Error\nWrong arguments"), -1);
 	else
-		args = ft_calloc(sizeof(int), size + 1);
-	if (!args)
-		return (NULL);
-	fill_args(av, args, ac);
-	return (args);
+		*args = ft_calloc(sizeof(long), size + 1);
+	if (!*args)
+		return (-1);
+	if (fill_args(av, *args, ac))
+		return (ft_printf("Error\nOverflow in arguments"), free(*args), -1);
+	if (duplicate(*args))
+		return (ft_printf("Error\nThere is a duplicate in the list"),
+			free(*args), -1);
+	return (0);
 }

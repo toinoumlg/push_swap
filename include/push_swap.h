@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:44:06 by amalangu          #+#    #+#             */
-/*   Updated: 2025/03/18 14:53:49 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/03/23 11:08:05 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,17 @@ typedef struct s_stack
 }					t_stack;
 
 int					check_arg(char **av, int ac);
-int					*set_up_args(char **av, int ac);
+int					set_up_args(char **av, int ac, long **args);
+
+void				set_index(t_stack **head, long *args, int size);
+int					head_index(t_stack *stack);
+int					next_index(t_stack *stack);
+int					tail_index(t_stack *stack);
+int					tail_previous_index(t_stack *stack);
+int					head_next_index(t_stack *stack);
 
 t_stack				*set_stack(char **av, int ac);
+int					stack_size(t_stack *stack);
 void				free_stack(t_stack *stack);
 
 void				push_a(t_stack **a, t_stack **b);
@@ -50,6 +58,8 @@ void				rr(t_stack **a, t_stack **b);
 void				reverse_rotate(t_stack **stack, char a_or_b);
 void				rrr(t_stack **a, t_stack **b);
 
+void				radx(t_stack **a, t_stack **b, int size);
+void				sort_small(t_stack **a, t_stack **b, int size);
 void				print_stacks(t_stack *a, t_stack *b);
 
 #endif

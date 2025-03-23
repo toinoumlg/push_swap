@@ -1,36 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   radx.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/27 18:08:30 by amalangu          #+#    #+#             */
-/*   Updated: 2025/03/20 19:08:18 by amalangu         ###   ########.fr       */
+/*   Created: 2025/03/20 17:22:06 by amalangu          #+#    #+#             */
+/*   Updated: 2025/03/20 18:40:58 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	swap(t_stack **stack, char a_or_b)
+void	radx(t_stack **a, t_stack **b, int size)
 {
-	t_stack	*head;
-	t_stack	*next;
+	int	max_num;
+	int	max_bits;
+	int	i;
+	int	j;
 
-	head = *stack;
-	if (!head || !head->next)
-		return ;
-	next = head->next;
-	head->next = next->next;
-	next->next = head;
-	*stack = next;
-	if (a_or_b)
-		ft_printf("s%c\n", a_or_b);
-}
-
-void	ss(t_stack **a, t_stack **b)
-{
-	swap(a, 0);
-	swap(b, 0);
-	ft_printf("ss\n");
+	max_num = size - 1;
+	max_bits = 0;
+	i = 0;
+	while ((max_num >> max_bits) != 0)
+		++max_bits;
+	while (i < max_bits)
+	{
+		j = 0;
+		while (j < size)
+		{
+			if (((head_index(*a) >> i) & 1) == 1)
+				rotate(a, 'a');
+			else
+				push_b(a, b);
+			++j;
+		}
+		while (stack_size(*b) != 0)
+			push_a(a, b);
+		++i;
+	}
 }
