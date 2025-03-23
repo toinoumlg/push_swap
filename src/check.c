@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:55:38 by amalangu          #+#    #+#             */
-/*   Updated: 2025/03/23 11:55:26 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/03/23 11:58:39 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,16 @@ int	fill_args_string(char *av, long *args, int i, int j)
 int	fill_args(char **av, long *args, int ac)
 {
 	int		i;
-	long	tmp;
+	long	nb;
 
 	i = 0;
 	if (ac > 2)
 	{
 		while (av[++i])
 		{
-			tmp = atol(av[i]);
-			if (tmp <= INT_MAX && tmp >= INT_MIN)
-				args[i - 1] = ft_atoi(av[i]);
+			nb = atol(av[i]);
+			if (nb <= INT_MAX && nb >= INT_MIN)
+				args[i - 1] = nb;
 			else
 				return (-1);
 		}
