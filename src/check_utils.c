@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:14:35 by amalangu          #+#    #+#             */
-/*   Updated: 2025/03/23 11:31:46 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/03/28 16:05:29 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_arg_multiple_ac(char **av, int i, int j)
 	while (av[i])
 	{
 		j = 0;
-		if (av[i][j] == '-' || '+')
+		if (av[i][j] == '-' || av[i][j] == '+')
 			j++;
 		while (av[i][j] >= 48 && av[i][j] <= 57)
 			j++;

@@ -56,25 +56,5 @@
   "C_Cpp_Runner.useLeakSanitizer": false,
   "C_Cpp_Runner.showCompilationTime": false,
   "C_Cpp_Runner.useLinkTimeOptimization": false,
-  "C_Cpp_Runner.msvcSecureNoWarnings": false,
-  "files.associations": {
-    "*.gql": "graphql",
-    "push_swap.h": "c",
-    "random": "c",
-    "array": "c",
-    "string_view": "c",
-    "initializer_list": "c",
-    "bitset": "c",
-    "regex": "c",
-    "optional": "c",
-    "ratio": "c",
-    "system_error": "c",
-    "functional": "c",
-    "tuple": "c",
-    "type_traits": "c",
-    "utility": "c",
-    "variant": "c",
-    "chrono": "c"
-  },
-  "C_Cpp.errorSquiggles": "disabled"
+  "C_Cpp_Runner.msvcSecureNoWarnings": false
 }

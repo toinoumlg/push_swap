@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:30:04 by amalangu          #+#    #+#             */
-/*   Updated: 2025/03/23 11:26:48 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/03/28 16:35:11 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_stack	*new_stack(int i)
 	return (new);
 }
 
-void	set_head(t_stack **head, long *args)
+void	set_head(t_stack **head, long *args, int size)
 {
 	t_stack	*new;
 	t_stack	*tmp;
@@ -58,7 +58,7 @@ void	set_head(t_stack **head, long *args)
 	i = 0;
 	*head = new_stack(args[i]);
 	tmp = *head;
-	while (args[++i])
+	while (++i < size)
 	{
 		new = new_stack(args[i]);
 		if (!new)
@@ -72,13 +72,15 @@ t_stack	*set_stack(char **av, int ac)
 {
 	t_stack	*head;
 	long	*args;
+	int		size;
 
-	if (set_up_args(av, ac, &args) || !args)
+	size = set_up_args(av, ac, &args);
+	if (size < 0 || !args)
 		return (NULL);
-	set_head(&head, args);
+	set_head(&head, args, size);
 	if (!head)
 		return (free(args), NULL);
-	set_index(&head, args, stack_size(head));
+	set_index(&head, args, size);
 	free(args);
 	return (head);
 }

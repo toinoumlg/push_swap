@@ -6,16 +6,18 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:55:38 by amalangu          #+#    #+#             */
-/*   Updated: 2025/03/23 11:58:39 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/03/28 16:32:25 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-int	check_and_reset_tmp(long *nb, char *tmp, long **args, int *x)
+int	check_and_reset_tmp(char *tmp, long *args, int *x)
 {
-	*nb = ft_atol(tmp);
-	if (*nb <= INT_MAX && *nb >= INT_MIN)
+	long	nb;
+
+	nb = ft_atol(tmp);
+	if (nb <= INT_MAX && nb >= INT_MIN)
 		args[++*x] = nb;
 	else
 		return (-1);
@@ -26,7 +28,6 @@ int	check_and_reset_tmp(long *nb, char *tmp, long **args, int *x)
 int	fill_args_string(char *av, long *args, int i, int j)
 {
 	char	tmp[16];
-	long	nb;
 	int		x;
 
 	x = -1;
@@ -38,8 +39,8 @@ int	fill_args_string(char *av, long *args, int i, int j)
 			tmp[j++] = av[i++];
 		while (av[i] >= 48 && av[i] <= 57)
 			tmp[j++] = av[i++];
-		if (j > 0 && (av[i] == ' ' || av[i] == '\0'))
-			if (check_and_reset_tmp(&nb, tmp, &args, &x))
+		if (j > 0 && (av[i] == ' ' || av[i] == 0))
+			if (check_and_reset_tmp(tmp, args, &x))
 				return (-1);
 		if (av[i] == ' ')
 			i++;
@@ -70,13 +71,13 @@ int	fill_args(char **av, long *args, int ac)
 	return (0);
 }
 
-int	duplicate(long *args)
+int	duplicate(long *args, int size)
 {
 	int	i;
 	int	x;
 
 	i = -1;
-	while (args[++i])
+	while (++i < size)
 	{
 		x = i;
 		while (args[++x])
@@ -92,15 +93,15 @@ int	set_up_args(char **av, int ac, long **args)
 
 	size = check_arg(av, ac);
 	if (size < 1)
-		return (ft_printf("Error\nWrong arguments"), -1);
+		return (ft_printf("Error\n"), -1);
 	else
 		*args = ft_calloc(sizeof(long), size + 1);
 	if (!*args)
 		return (-1);
 	if (fill_args(av, *args, ac))
-		return (ft_printf("Error\nOverflow in arguments"), free(*args), -1);
-	if (duplicate(*args))
-		return (ft_printf("Error\nThere is a duplicate in the list"),
+		return (ft_printf("Error\n"), free(*args), -1);
+	if (duplicate(*args, size))
+		return (ft_printf("Error\n"),
 			free(*args), -1);
-	return (0);
+	return (size);
 }
