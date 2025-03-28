@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:55:38 by amalangu          #+#    #+#             */
-/*   Updated: 2025/03/28 16:32:25 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/03/28 21:17:51 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	duplicate(long *args, int size)
 	while (++i < size)
 	{
 		x = i;
-		while (args[++x])
+		while (++x < size)
 			if (args[i] == args[x])
 				return (-1);
 	}

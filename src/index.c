@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 19:01:47 by amalangu          #+#    #+#             */
-/*   Updated: 2025/03/28 16:32:50 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/03/28 21:01:17 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	get_index(long *args, int i, int size)
 
 	j = -1;
 	index = 0;
-	ft_printf("i %d\n size %d");
 	while (++j < size)
 	{
 		if (args[j] < i)

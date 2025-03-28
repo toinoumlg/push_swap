@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:43:42 by amalangu          #+#    #+#             */
-/*   Updated: 2025/03/28 16:26:20 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/03/28 21:21:08 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	main(int ac, char **av)
 		return (ft_printf("Error\n"), -1);
 	a = set_stack(av, ac);
 	b = NULL;
-	print_stacks(a,b);
 	if (!a)
 		return (-1);
 	if (is_stack_sorted(a))
