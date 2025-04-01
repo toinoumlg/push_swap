@@ -52,3 +52,5 @@ Mkfile.old
 dkms.conf
 
 push_swap_tester
+push_swap_visualizer
+.vscode
