@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:44:06 by amalangu          #+#    #+#             */
-/*   Updated: 2025/03/23 11:08:05 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/04/01 17:09:36 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int					head_next_index(t_stack *stack);
 t_stack				*set_stack(char **av, int ac);
 int					stack_size(t_stack *stack);
 void				free_stack(t_stack *stack);
+int					is_stack_sorted(t_stack *stack);
 
 void				push_a(t_stack **a, t_stack **b);
 void				push_b(t_stack **a, t_stack **b);

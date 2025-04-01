@@ -6,21 +6,11 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:43:42 by amalangu          #+#    #+#             */
-/*   Updated: 2025/03/28 21:21:08 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/04/01 17:09:19 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-
-int	is_stack_sorted(t_stack *stack)
-{
-	while (stack->next && head_index(stack) < next_index(stack))
-		stack = stack->next;
-	if (stack->next)
-		return (0);
-	else
-		return (1);
-}
 
 int	main(int ac, char **av)
 {
@@ -28,7 +18,7 @@ int	main(int ac, char **av)
 	t_stack	*b;
 
 	if (ac < 2)
-		return (ft_printf("Error\n"), -1);
+		return (ft_putstr_fd("Error\n", 2), -1);
 	a = set_stack(av, ac);
 	b = NULL;
 	if (!a)

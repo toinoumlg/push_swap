@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:55:38 by amalangu          #+#    #+#             */
-/*   Updated: 2025/03/28 21:17:51 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/04/01 17:02:35 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	fill_args_string(char *av, long *args, int i, int j)
 	return (0);
 }
 
+// fill *args from **av, return -1 in case of overflow else 0.
 int	fill_args(char **av, long *args, int ac)
 {
 	int		i;
@@ -71,6 +72,7 @@ int	fill_args(char **av, long *args, int ac)
 	return (0);
 }
 
+// check for duplicate in args return -1 if duplicate found else 0
 int	duplicate(long *args, int size)
 {
 	int	i;
@@ -87,21 +89,21 @@ int	duplicate(long *args, int size)
 	return (0);
 }
 
+// check arguments from input, fills *args with it return the stack size
 int	set_up_args(char **av, int ac, long **args)
 {
 	int	size;
 
 	size = check_arg(av, ac);
 	if (size < 1)
-		return (ft_printf("Error\n"), -1);
+		return (ft_putstr_fd("Error\n", 2), -1);
 	else
 		*args = ft_calloc(sizeof(long), size + 1);
 	if (!*args)
 		return (-1);
 	if (fill_args(av, *args, ac))
-		return (ft_printf("Error\n"), free(*args), -1);
+		return (ft_putstr_fd("Error\n", 2), free(*args), -1);
 	if (duplicate(*args, size))
-		return (ft_printf("Error\n"),
-			free(*args), -1);
+		return (ft_putstr_fd("Error\n", 2), free(*args), -1);
 	return (size);
 }

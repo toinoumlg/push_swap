@@ -20,9 +20,7 @@ $(OBJ_DIR):
 visualizer: all
 	@./push_swap_visualizer/build/bin/visualizer
 
-
-norminette:
-	clear
+norminette: all
 	norminette $(SRC_DIR) include
 
 libftprintf:
