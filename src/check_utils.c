@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:14:35 by amalangu          #+#    #+#             */
-/*   Updated: 2025/04/01 17:03:34 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/04/04 12:27:07 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	check_arg_single_ac(char *av, int i, int j)
 			i++;
 		while (av[i] >= 48 && av[i] <= 57)
 			i++;
-		if (!av[i])
+		if (!av[i] && i > 1)
 		{
 			j++;
 			break ;

@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:43:42 by amalangu          #+#    #+#             */
-/*   Updated: 2025/04/01 17:09:19 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/04/04 12:30:14 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ int	main(int ac, char **av)
 		sort_small(&a, &b, stack_size(a));
 	else
 		radx(&a, &b, stack_size(a));
-	free_stack(a);
-	free_stack(b);
+	return (free_stack(a), free_stack(b), 0);
 }

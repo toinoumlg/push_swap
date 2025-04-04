@@ -51,6 +51,9 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-push_swap_tester
-push_swap_visualizer
+push_swap_tester/
+push_swap_visualizer/
 .vscode
+push_swap_test_linux.sh
+checker_linux
+tester.sh
