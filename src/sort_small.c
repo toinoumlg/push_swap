@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 17:27:41 by amalangu          #+#    #+#             */
-/*   Updated: 2025/03/20 19:08:28 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/04/07 16:12:58 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,22 @@ void	sort_three(t_stack **stack)
 
 void	get_min_position(t_stack *stack, int *min_index, int *position)
 {
-	*min_index = 5;
-	*position = 0;
-	while (stack)
+	t_stack	*tmp;
+
+	*min_index = INT_MAX;
+	tmp = stack;
+	while (tmp)
 	{
-		if (head_index(stack) < *min_index)
-		{
-			*min_index = head_index(stack);
-			*position = 0;
-			while (stack && head_index(stack) != *min_index)
-			{
-				*position = *position + 1;
-				stack = stack->next;
-			}
-		}
-		else
-			stack = stack->next;
+		if (head_index(tmp) < *min_index)
+			*min_index = head_index(tmp);
+		tmp = tmp->next;
+	}
+	tmp = stack;
+	*position = 0;
+	while (head_index(tmp) != *min_index)
+	{
+		*position = *position + 1;
+		tmp = tmp->next;
 	}
 }
 
