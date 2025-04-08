@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:55:38 by amalangu          #+#    #+#             */
-/*   Updated: 2025/04/07 15:41:48 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:54:33 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,28 @@ int	check_and_reset_tmp(char *tmp, long *args, int *x)
 		args[++*x] = nb;
 	else
 		return (-1);
-	ft_bzero(tmp, 25);
+	ft_bzero(tmp, 14);
 	return (0);
 }
 
 int	fill_args_string(char *av, long *args, int i, int j)
 {
-	char	tmp[25];
+	char	tmp[14];
 	int		x;
 
 	x = -1;
-	ft_bzero(tmp, 25);
+	ft_bzero(tmp, 14);
 	while (av[i])
 	{
 		j = 0;
 		if (av[i] == '-' || av[i] == '+')
 			tmp[j++] = av[i++];
 		while (av[i] >= 48 && av[i] <= 57)
+		{
 			tmp[j++] = av[i++];
+			if (j > 12)
+				return (-1);
+		}
 		if (j > 0 && (av[i] == ' ' || av[i] == 0))
 			if (check_and_reset_tmp(tmp, args, &x))
 				return (-1);

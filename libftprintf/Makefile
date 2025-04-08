@@ -1,6 +1,6 @@
 LIBFTPRINTF = libftprintf.a
 CFLAGS = -Werror -Wall -Wextra
-CC = gcc 
+CC = cc 
 HEADER = include/ft_printf.h
 
 SRCS = ft_printf.c ft_printf_putstr_int.c \
@@ -23,12 +23,15 @@ OBJECTS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
 all: $(LIBFTPRINTF)
 
-$(LIBFTPRINTF): $(OBJECTS) $(HEADER) 
+$(LIBFTPRINTF): $(OBJ_DIR) $(OBJECTS) $(HEADER) 
 	ar rcs $(LIBFTPRINTF) $(OBJECTS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	mkdir -p $(OBJ_DIR)
 	$(CC) $(INCLUDES) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+
 
 clean:
 	rm -f $(OBJECTS)
