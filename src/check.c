@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:55:38 by amalangu          #+#    #+#             */
-/*   Updated: 2025/04/04 13:02:53 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/04/11 14:09:43 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_and_reset_tmp(char *tmp, long *args, int *x)
 	long	nb;
 
 	nb = ft_atol(tmp);
-	if (nb <= INT_MAX && nb >= INT_MIN)
+	if (nb <= INT_MAX && nb >= INT_MIN && ft_strlen_no_0(tmp) < 12)
 		args[++*x] = nb;
 	else
 		return (-1);
@@ -59,8 +59,8 @@ int	fill_args(char **av, long *args, int ac)
 	{
 		while (av[++i])
 		{
-			nb = atol(av[i]);
-			if (nb <= INT_MAX && nb >= INT_MIN)
+			nb = ft_atol(av[i]);
+			if (nb <= INT_MAX && nb >= INT_MIN && ft_strlen_no_0(av[i]) < 12)
 				args[i - 1] = nb;
 			else
 				return (-1);

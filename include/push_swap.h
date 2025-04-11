@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:44:06 by amalangu          #+#    #+#             */
-/*   Updated: 2025/04/01 17:09:36 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/04/11 14:04:21 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ void				set_index(t_stack **head, long *args, int size);
 int					head_index(t_stack *stack);
 int					next_index(t_stack *stack);
 int					tail_index(t_stack *stack);
-int					tail_previous_index(t_stack *stack);
-int					head_next_index(t_stack *stack);
+int					ft_strlen_no_0(char *str);
 
 t_stack				*set_stack(char **av, int ac);
 int					stack_size(t_stack *stack);
