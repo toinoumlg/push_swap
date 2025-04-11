@@ -21,22 +21,44 @@ LIBFT_OBJ_DIR = libft/src/obj/
 OBJ_DIR = $(SRC_DIR)/obj
 OBJECTS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
+#Printf colors
+NC= \033[0m
+BLACK= \033[0;30m
+RED= \033[0;31m
+GREEN= \033[0;32m
+YELLOW= \033[0;33m
+BLUE= \033[0;34m
+PURPLE= \033[0;35m
+CYAN= \033[0;36m
+WHITE= \033[0;37m
+
 all: $(LIBFTPRINTF)
 
-$(LIBFTPRINTF): $(OBJ_DIR) $(OBJECTS) $(HEADER) 
+$(LIBFTPRINTF): $(OBJ_DIR) $(OBJECTS) $(HEADER)
+	@printf "$(PURPLE)"
 	ar rcs $(LIBFTPRINTF) $(OBJECTS)
+	@printf "$(NC)"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@printf "$(YELLOW)"
 	$(CC) $(INCLUDES) $(CFLAGS) -c $< -o $@
+	@printf "$(NC)"
 
 $(OBJ_DIR):
+	@printf "$(BLUE)"
 	mkdir -p $(OBJ_DIR)
+	@printf "$(NC)"
 
 clean:
+	@printf "$(RED)"
 	rm -rf $(OBJ_DIR)
+	@printf "$(NC)"
 
-fclean: clean
+fclean:
+	@printf "$(RED)"
+	rm -rf $(OBJ_DIR)
 	rm -f $(LIBFTPRINTF)
+	@printf "$(NC)"
 
 re: fclean all
 
