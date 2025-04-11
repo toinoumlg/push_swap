@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:43:42 by amalangu          #+#    #+#             */
-/*   Updated: 2025/04/07 16:13:03 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/04/11 16:03:45 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int ac, char **av)
 	t_stack	*b;
 
 	if (ac < 2)
-		return (ft_putstr_fd("Error\n", 2), -1);
+		return (0);
 	a = set_stack(av, ac);
 	b = NULL;
 	if (!a)
