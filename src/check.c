@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:55:38 by amalangu          #+#    #+#             */
-/*   Updated: 2025/05/05 15:22:34 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/05/05 16:50:23 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ int	fill_args(char **av, long *args, int ac)
 	{
 		while (av[++i])
 		{
-			while (i < ac && ft_strlen_no_0(av[i]) == 0)
+			while (i < ac && ft_strlen(av[i]) == 0)
 				i++;
-			if (i >= ac)
+			if (i > ac)
 				break ;
 			nb = ft_atol(av[i]);
 			if (nb <= INT_MAX && nb >= INT_MIN && ft_strlen_no_0(av[i]) < 12)

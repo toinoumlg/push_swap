@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 19:01:47 by amalangu          #+#    #+#             */
-/*   Updated: 2025/04/01 17:09:24 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/05/05 16:49:24 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	get_index(long *args, int i, int size)
 	return (index);
 }
 
-//set final index in list
+// set final index in list
 void	set_index(t_stack **head, long *args, int size)
 {
 	t_stack	*tmp;
