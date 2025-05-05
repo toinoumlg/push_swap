@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 17:23:48 by amalangu          #+#    #+#             */
-/*   Updated: 2025/04/11 14:07:22 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/05/05 15:09:43 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ int	ft_strlen_no_0(char *str)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (*str == '0')
+		str++;
+	if (*str == '+' || *str == '-')
 		str++;
 	while (*str >= '0' && *str <= '9' && str)
 	{

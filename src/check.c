@@ -6,7 +6,7 @@
 /*   By: amalangu <amalangu@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:55:38 by amalangu          #+#    #+#             */
-/*   Updated: 2025/04/11 14:09:43 by amalangu         ###   ########.fr       */
+/*   Updated: 2025/05/05 15:22:34 by amalangu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,15 @@ int	fill_args_string(char *av, long *args, int i, int j)
 			tmp[j++] = av[i++];
 		while (av[i] >= 48 && av[i] <= 57)
 			tmp[j++] = av[i++];
-		if (j > 0 && (av[i] == ' ' || av[i] == 0))
+		if (j > 0 && (av[i] == 0 || av[i] == ' '))
 			if (check_and_reset_tmp(tmp, args, &x))
 				return (-1);
-		if (av[i] == ' ')
+		if (av[i] == 0)
+			return (0);
+		else if (av[i] == ' ' && av[i + 1] >= 48 && av[i + 1] <= 57)
 			i++;
+		else
+			return (-1);
 	}
 	return (0);
 }
@@ -52,16 +56,22 @@ int	fill_args_string(char *av, long *args, int i, int j)
 int	fill_args(char **av, long *args, int ac)
 {
 	int		i;
+	int		j;
 	long	nb;
 
+	j = 0;
 	i = 0;
 	if (ac > 2)
 	{
 		while (av[++i])
 		{
+			while (i < ac && ft_strlen_no_0(av[i]) == 0)
+				i++;
+			if (i >= ac)
+				break ;
 			nb = ft_atol(av[i]);
 			if (nb <= INT_MAX && nb >= INT_MIN && ft_strlen_no_0(av[i]) < 12)
-				args[i - 1] = nb;
+				args[j++] = nb;
 			else
 				return (-1);
 		}
